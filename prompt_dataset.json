@@ -1,0 +1,27 @@
+[
+    {
+      "user_query": "cpu usage",
+      "metric": "node_cpu_seconds_total",
+      "promql": "100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[1h])) * 100)",
+      "explanation": "Calculates the active CPU usage as a percentage."
+    },
+    {
+      "user_query": "heap memory usage",
+      "metric": "go_memstats_heap_alloc_bytes",
+      "promql": "go_memstats_heap_alloc_bytes",
+      "explanation": "Current bytes of heap memory allocated by the Go runtime."
+    },
+    {
+        "user_query": "memory stats",
+        "metric": "node_memory_MemTotal_bytes, node_memory_MemAvailable_bytes",
+        "promql": "sum(node_memory_MemTotal_bytes) - sum(node_memory_MemAvailable_bytes)",
+        "explanation": "Total memory used across nodes. Prometheus doesn't support 'AS' like SQL, so avoid aliasing."
+      },      
+    {
+      "user_query": "disk write operations",
+      "metric": "node_disk_writes_completed_total",
+      "promql": "rate(node_disk_writes_completed_total[5m])",
+      "explanation": "Rate of disk write operations over the last 5 minutes."
+    }
+  ]
+  
